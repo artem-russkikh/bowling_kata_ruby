@@ -59,12 +59,14 @@ class BowlingGame
 
     protected
 
+    # @return [Integer]
     def frame_score
       pins.sum
     end
 
     private
 
+    # @return [Integer]
     def strike_bonus
       return 0 unless next_frame
       return next_frame.frame_score unless next_frame.strike?
@@ -72,6 +74,7 @@ class BowlingGame
       next_frame.frame_score + frame_after_next_score
     end
 
+    # @return [Integer]
     def spare_bonus
       next_frame.try(:first_pin) || 0
     end

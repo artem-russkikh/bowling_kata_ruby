@@ -32,6 +32,11 @@ class BowlingGame
 
   private
 
+  def tenth_frame?
+    current_frame_index >= 10
+  end
+
+  # @return [BowlingGame::Frame]
   def update_current_frame!
     updated_frame = frame_after_roll
     return (self.current_frame = updated_frame) if updated_frame
@@ -50,28 +55,29 @@ class BowlingGame
     current_frame
   end
 
-  def tenth_frame?
-    current_frame_index >= 10
-  end
-
+  # @return [Integer]
   def roll_limit
     return 1 if current_frame_is_strike?
     return 3 if tenth_frame? && pins_is_a_strike?
     2
   end
 
-  def current_frame
-    frames[current_frame_index]
-  end
-
-  def current_frame_is_strike?
-    current_frame.pins.first == 10
-  end
-
+  # @return [Boolean]
   def pins_is_a_strike?
     pins == 10
   end
 
+  # @return [BowlingGame::Frame]
+  def current_frame
+    frames[current_frame_index]
+  end
+
+  # @return [Boolean]
+  def current_frame_is_strike?
+    current_frame.pins.first == 10
+  end
+
+  # @return [BowlingGame::Frame]
   def current_frame=(value)
     frames[current_frame_index] = value
   end
