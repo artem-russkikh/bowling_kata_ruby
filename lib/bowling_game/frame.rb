@@ -6,32 +6,33 @@ require 'active_support/core_ext/module/delegation'
 class BowlingGame
   # Class for safely accessing score in frames
   class Frame
+    # @return [BowlingGame::Frame]
+    attr_accessor :prev, :next
     # @return [Array]
     attr_reader :pins
 
-    delegate :count, :size, to: :pins
+    delegate :count, :size, :blank, :empty, to: :pins
 
     # @return [BowlingGame::Frame]
-    def initialize(args = [])
-      @pins = args
-      @pins = [] unless pins.is_a?(Array)
+    def initialize(*arguments)
+      args = arguments[0] || {}
+      @prev = args[:prev]
+      @next = args[:next]
+      pins_value = args[:pins]
+      @pins = pins_value
+      @pins = [] unless pins_value.is_a?(Array)
       @pins = pins.delete_if(&:blank?)
       raise ArgumentError if pins.any? { |pin| !pin.is_a?(Integer) }
     end
 
     # @return [Integer]
-    def first_roll
+    def first_pin
       pins[0] || 0
-    end
-
-    # @return [Integer]
-    def second_roll
-      pins[1] || 0
     end
 
     # @return [Boolean]
     def strike?
-      first_roll == 10
+      first_pin == 10
     end
 
     # @return [Boolean]
