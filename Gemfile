@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 
 ruby '2.3.1'
 
+gem 'activesupport', '~> 5.0'
+
 group :test do
   gem 'rspec', '~> 3.0'
   gem 'rubocop', '~> 0.41'

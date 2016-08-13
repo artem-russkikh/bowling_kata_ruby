@@ -9,13 +9,21 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (5.0.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (~> 0.7)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
     ast (2.3.0)
     byebug (9.0.5)
     coderay (1.1.1)
+    concurrent-ruby (1.0.2)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    i18n (0.7.0)
     json (2.0.1)
     method_source (0.8.2)
+    minitest (5.9.0)
     parser (2.3.1.2)
       ast (~> 2.2)
     powerpack (0.1.1)
@@ -50,12 +58,16 @@ GEM
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
     slop (3.6.0)
+    thread_safe (0.3.5)
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
     unicode-display_width (1.1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport (~> 5.0)
   pry-byebug!
   rspec (~> 3.0)
   rubocop (~> 0.41)

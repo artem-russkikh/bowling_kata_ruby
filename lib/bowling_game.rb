@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'active_support/core_ext/array/grouping'
 
 # A game has 10 frames
 # A frame has 1 or two rolls
@@ -23,7 +24,9 @@ class BowlingGame
   # @return [Integer]
   def score
     result = 0
-    rolls.each { |roll| result += roll }
+    rolls.in_groups_of(2) do |frame|
+      result += (frame[0] + frame[1])
+    end
     result
   end
 
