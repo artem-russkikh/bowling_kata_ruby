@@ -13,8 +13,8 @@ describe BowlingGame do
     subject.roll(pins: 10)
   end
 
-  it('can be #roll') { is_expected.to respond_to :roll }
-  it('can get #score') { is_expected.to respond_to :score }
+  it('respond_to #roll') { is_expected.to respond_to :roll }
+  it('respond_to #score') { is_expected.to respond_to :score }
 
   context '#roll 20.times with zero pins' do
     before { roll_many(20, 0) }
