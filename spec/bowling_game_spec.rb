@@ -28,7 +28,7 @@ describe BowlingGame do
     it('#score is correct') { expect(subject.score).to eq(20) }
   end
 
-  xcontext '#roll 12.times with only strikes' do
+  context '#roll 12.times with only strikes' do
     before { roll_many(12, 10) }
 
     it('#score is correct') { expect(subject.score).to eq(300) }
@@ -49,9 +49,10 @@ describe BowlingGame do
       roll_strike
       subject.roll(pins: 3)
       subject.roll(pins: 4)
+      subject.roll(pins: 1)
       roll_many(16, 0)
     end
 
-    it('strike add extra 3+4 scores') { expect(subject.score).to eq(24) }
+    it('strike add extra 3+4 scores') { expect(subject.score).to eq(25) }
   end
 end
