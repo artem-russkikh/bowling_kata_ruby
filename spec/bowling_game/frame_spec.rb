@@ -91,16 +91,16 @@ describe BowlingGame::Frame do
 
   context 'linked frames #score count strike' do
     let!(:first_frame) { described_class.new(pins: [10]) }
-    let!(:second_frame) { described_class.new(pins: [3]) }
-    let!(:third_frame) { described_class.new(pins: [5]) }
+    let!(:second_frame) { described_class.new(pins: [3, 5]) }
+    let!(:third_frame) { described_class.new(pins: [5, 0]) }
 
     subject { first_frame }
 
     before do
-      first_frame.next = second_frame
-      second_frame.prev = first_frame
-      second_frame.next = third_frame
-      third_frame.prev = second_frame
+      first_frame.next_frame = second_frame
+      second_frame.prev_frame = first_frame
+      second_frame.next_frame = third_frame
+      third_frame.prev_frame = second_frame
     end
 
     it('#first_pin is correct') { expect(subject.first_pin).to eq(10) }
@@ -110,16 +110,16 @@ describe BowlingGame::Frame do
 
   context 'linked frames #score count spare' do
     let!(:first_frame) { described_class.new(pins: [5, 5]) }
-    let!(:second_frame) { described_class.new(pins: [3]) }
-    let!(:third_frame) { described_class.new(pins: [5]) }
+    let!(:second_frame) { described_class.new(pins: [3, 5]) }
+    let!(:third_frame) { described_class.new(pins: [5, 0]) }
 
     subject { first_frame }
 
     before do
-      first_frame.next = second_frame
-      second_frame.prev = first_frame
-      second_frame.next = third_frame
-      third_frame.prev = second_frame
+      first_frame.next_frame = second_frame
+      second_frame.prev_frame = first_frame
+      second_frame.next_frame = third_frame
+      third_frame.prev_frame = second_frame
     end
 
     it('#first_pin is correct') { expect(subject.first_pin).to eq(5) }

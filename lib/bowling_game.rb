@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-require 'active_support/core_ext/array/grouping'
-require 'active_support/core_ext/object/try'
 require 'bowling_game/frame'
 
 # A game has 10 frames
@@ -26,9 +24,7 @@ class BowlingGame
   # @return [Integer]
   def score
     result = 0
-    frames.each_with_index do |frame, frame_index|
-      result += process_frame(frame, frame_index)
-    end
+    frames.each { |frame| result += frame.score }
     result
   end
 
@@ -52,41 +48,8 @@ class BowlingGame
     return (frames[current_frame] = updated_frame) if updated_frame
     last_frame = frames.last
     @current_frame = current_frame + 1
-    frames.push Frame.new(pins: [pins], prev: last_frame)
-    last_frame.next = frames.last
-  end
-
-  # @return [Integer]
-  def strike_bonus(frame_index)
-    next_frame = frames[frame_index + 1]
-    return 0 unless next_frame
-    if next_frame.strike?
-      frame_after_next = frames[frame_index + 2]
-      if frame_after_next
-        next_frame.score + frame_after_next.score
-      else
-        next_frame.score
-      end
-    else
-      next_frame.score
-    end
-  end
-
-  # @return [Integer]
-  def spare_bonus(frame_index)
-    next_frame = frames[frame_index + 1]
-    next_frame.first_pin
-  end
-
-  # @return [Integer]
-  def process_frame(frame, frame_index)
-    if frame.strike?
-      frame.score + strike_bonus(frame_index)
-    elsif frame.spare?
-      frame.score + spare_bonus(frame_index)
-    else
-      frame.score
-    end
+    frames.push Frame.new(pins: [pins], prev_frame: last_frame)
+    last_frame.next_frame = frames.last
   end
 
   # @return [Array]

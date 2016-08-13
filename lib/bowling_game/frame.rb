@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'active_support/core_ext/object/try'
 require 'active_support/core_ext/object/blank'
 require 'active_support/core_ext/enumerable'
 require 'active_support/core_ext/module/delegation'
@@ -7,7 +8,7 @@ class BowlingGame
   # Class for safely accessing score in frames
   class Frame
     # @return [BowlingGame::Frame]
-    attr_accessor :prev, :next
+    attr_accessor :prev_frame, :next_frame
     # @return [Array]
     attr_reader :pins
 
@@ -16,8 +17,8 @@ class BowlingGame
     # @return [BowlingGame::Frame]
     def initialize(*arguments)
       args = arguments[0] || {}
-      @prev = args[:prev]
-      @next = args[:next]
+      @prev_frame = args[:prev_frame]
+      @next_frame = args[:next_frame]
       pins_value = args[:pins]
       @pins = pins_value
       @pins = [] unless pins_value.is_a?(Array)
@@ -37,17 +38,43 @@ class BowlingGame
 
     # @return [Boolean]
     def spare?
-      score == 10
+      pins.sum == 10
     end
 
     # @return [Integer]
     def score
-      pins.sum
+      score_count = frame_score
+      if strike?
+        score_count + strike_bonus
+      elsif spare?
+        score_count + spare_bonus
+      else
+        score_count
+      end
     end
 
     # @return [BowlingGame::Frame]
     def push(pin)
       @pins.push(pin)
+    end
+
+    protected
+
+    def frame_score
+      pins.sum
+    end
+
+    private
+
+    def strike_bonus
+      return 0 unless next_frame
+      return next_frame.frame_score unless next_frame.strike?
+      frame_after_next_score = next_frame&.next_frame&.frame_score || 0
+      next_frame.frame_score + frame_after_next_score
+    end
+
+    def spare_bonus
+      next_frame.try(:first_pin) || 0
     end
   end
 end
