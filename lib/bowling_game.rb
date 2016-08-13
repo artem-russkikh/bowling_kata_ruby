@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'active_support/core_ext/array/grouping'
+require 'bowling_game/frame'
 
 # A game has 10 frames
 # A frame has 1 or two rolls
