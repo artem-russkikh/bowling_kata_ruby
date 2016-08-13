@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 require 'active_support/core_ext/object/try'
 require 'active_support/core_ext/object/blank'
-require 'active_support/core_ext/enumerable'
 require 'active_support/core_ext/module/delegation'
 
 class BowlingGame
@@ -17,8 +16,8 @@ class BowlingGame
     # @return [BowlingGame::Frame]
     def initialize(*arguments)
       args = arguments[0] || {}
-      @prev_frame = args[:prev_frame]
-      @next_frame = args[:next_frame]
+      self.prev_frame = args[:prev_frame]
+      self.next_frame = args[:next_frame]
       pins_value = args[:pins]
       @pins = pins_value
       @pins = [] unless pins_value.is_a?(Array)
