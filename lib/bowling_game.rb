@@ -27,7 +27,7 @@ class BowlingGame
     frames = rolls.in_groups_of(2)
     frames.each_with_index do |frame, frame_index|
       next_frame = frames[frame_index + 1]
-      frame_sum = frame[0] + frame[1]
+      frame_sum = sum_frames(frame[0], frame[1])
       result += if spare?(frame_sum)
                   frame_sum + next_frame[0] # spare
                 else
@@ -41,6 +41,12 @@ class BowlingGame
 
   def spare?(frame_sum)
     frame_sum == 10
+  end
+
+  def sum_frames(first_frame, second_frame)
+    first = first_frame || 0
+    second = second_frame || 0
+    first + second
   end
 
   attr_reader :rolls

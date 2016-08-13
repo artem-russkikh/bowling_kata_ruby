@@ -9,6 +9,10 @@ describe BowlingGame do
     subject.roll(pins: 5)
   end
 
+  def roll_strike
+    subject.roll(pins: 10)
+  end
+
   it('can be #roll') { is_expected.to respond_to :roll }
   it('can get #score') { is_expected.to respond_to :score }
 
@@ -32,5 +36,16 @@ describe BowlingGame do
     end
 
     it('spare add extra 3 score') { expect(subject.score).to eq(16) }
+  end
+
+  context '#roll strike' do
+    before do
+      roll_strike
+      subject.roll(pins: 3)
+      subject.roll(pins: 4)
+      roll_many(16, 0)
+    end
+
+    it('strike add extra 3+4 scores') { expect(subject.score).to eq(24) }
   end
 end
