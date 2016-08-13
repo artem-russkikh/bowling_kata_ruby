@@ -55,13 +55,21 @@ class BowlingGame
   end
 
   def roll_limit
-    return 1 if current_frame.pins.first == 10
-    return 3 if tenth_frame? && pins == 10
+    return 1 if current_frame_is_strike?
+    return 3 if tenth_frame? && pins_is_a_strike?
     2
   end
 
   def current_frame
     frames[current_frame_index]
+  end
+
+  def current_frame_is_strike?
+    current_frame.pins.first == 10
+  end
+
+  def pins_is_a_strike?
+    pins == 10
   end
 
   def current_frame=(value)
