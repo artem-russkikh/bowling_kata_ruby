@@ -27,14 +27,7 @@ class BowlingGame
   def score
     result = 0
     rolls.in_groups_of(2).each_with_index do |frame_array, frame_index|
-      current_frame = Frame.new(frame_array)
-      result += if current_frame.strike?
-                  current_frame.score + strike_bonus(frame_index)
-                elsif current_frame.spare?
-                  current_frame.score + spare_bonus(frame_index)
-                else
-                  current_frame.score
-                end
+      result += process_frame(frame_array, frame_index)
     end
     result
   end
@@ -53,6 +46,17 @@ class BowlingGame
   def spare_bonus(frame_index)
     next_frame = Frame.new(rolls.in_groups_of(2)[frame_index + 1])
     next_frame.first_roll
+  end
+
+  def process_frame(frame_array, frame_index)
+    current_frame = Frame.new(frame_array)
+    if current_frame.strike?
+      current_frame.score + strike_bonus(frame_index)
+    elsif current_frame.spare?
+      current_frame.score + spare_bonus(frame_index)
+    else
+      current_frame.score
+    end
   end
 
   attr_reader :rolls
