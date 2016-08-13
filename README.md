@@ -32,4 +32,5 @@ http://angeleah.com/blog/2012/07/05/tutorial---the-bowling-game-kata-in-ruby.htm
 
 ## Other
 
-The implementation took me about 3 hours from start and this commit :)
+The implementation took me about 3 hours of working time from start and this commit ☺️
+
