@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 describe BowlingGame do
-  it 'can roll' do
+  it 'can be rolled' do
     expect(subject).to respond_to :roll
   end
 
