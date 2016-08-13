@@ -4,6 +4,7 @@ describe BowlingGame::Frame do
   it('respond_to #second_roll') { is_expected.to respond_to :second_roll }
   it('respond_to #strike?') { is_expected.to respond_to :strike? }
   it('respond_to #spare?') { is_expected.to respond_to :spare? }
+  it('respond_to #score') { is_expected.to respond_to :score }
 
   context 'frame when passing wrong argument' do
     context 'if argument is not Array' do
