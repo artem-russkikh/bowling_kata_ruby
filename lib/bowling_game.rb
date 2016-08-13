@@ -8,11 +8,14 @@ class BowlingGame
   # Called each time the player rolls a ball
   # @param pins [Integer] the number of pins knocked down
   # @return true
-  def roll
+  # def roll(pins:)
+  def roll(*)
+    true
   end
 
   # Iterate through all the frames, and calculate all their scores
   # @return [Integer]
   def score
+    0
   end
 end
