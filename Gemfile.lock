@@ -1,13 +1,28 @@
+GIT
+  remote: git://github.com/deivid-rodriguez/pry-byebug.git
+  revision: 557b2f42cf5e8301f7a0a42137a06ae621c08920
+  specs:
+    pry-byebug (3.4.0)
+      byebug (~> 9.0)
+      pry (~> 0.10)
+
 GEM
   remote: https://rubygems.org/
   specs:
     ast (2.3.0)
+    byebug (9.0.5)
+    coderay (1.1.1)
     diff-lcs (1.2.5)
     docile (1.1.5)
     json (2.0.1)
+    method_source (0.8.2)
     parser (2.3.1.2)
       ast (~> 2.2)
     powerpack (0.1.1)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     rainbow (2.1.0)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
@@ -34,12 +49,14 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
+    slop (3.6.0)
     unicode-display_width (1.1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  pry-byebug!
   rspec (~> 3.0)
   rubocop (~> 0.41)
   simplecov

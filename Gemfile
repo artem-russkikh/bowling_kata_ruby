@@ -8,3 +8,7 @@ group :test do
   gem 'rubocop', '~> 0.41'
   gem 'simplecov', require: false, group: :test
 end
+
+group :development, :test do
+  gem 'pry-byebug', github: 'deivid-rodriguez/pry-byebug'
+end

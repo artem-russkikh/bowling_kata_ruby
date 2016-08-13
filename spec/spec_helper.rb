@@ -17,8 +17,11 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'pry-byebug'
 require 'simplecov'
 SimpleCov.start
+
+require 'bowling_game'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
