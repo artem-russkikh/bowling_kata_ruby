@@ -24,8 +24,15 @@ class BowlingGame
   # @return [Integer]
   def score
     result = 0
-    rolls.in_groups_of(2) do |frame|
-      result += (frame[0] + frame[1])
+    frames = rolls.in_groups_of(2)
+    frames.each_with_index do |frame, index|
+      next_frame = frames[index + 1]
+      frame_sum = frame[0] + frame[1]
+      result += if frame_sum == 10
+                  frame_sum + next_frame[0] # spare
+                else
+                  frame_sum
+                end
     end
     result
   end
