@@ -34,20 +34,24 @@ class BowlingGame
 
   private
 
+  # @return [Boolean]
   def strike?(pins)
     pins == 10
   end
 
+  # @return [Integer]
   def strike_bonus(frame_index)
     next_frame = Frame.new(rolls.in_groups_of(2)[frame_index + 1])
     next_frame.score
   end
 
+  # @return [Integer]
   def spare_bonus(frame_index)
     next_frame = Frame.new(rolls.in_groups_of(2)[frame_index + 1])
     next_frame.first_roll
   end
 
+  # @return [Integer]
   def process_frame(frame_array, frame_index)
     current_frame = Frame.new(frame_array)
     if current_frame.strike?
@@ -59,6 +63,8 @@ class BowlingGame
     end
   end
 
+  # @return [Array]
   attr_reader :rolls
+  # @return [Integer]
   attr_reader :current_roll
 end

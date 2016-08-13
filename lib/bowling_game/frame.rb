@@ -4,9 +4,12 @@ require 'active_support/core_ext/object/blank'
 class BowlingGame
   # Class for safely accessing score in frames
   class Frame
+    # @return [Integer]
     attr_reader :first_roll
+    # @return [Integer]
     attr_reader :second_roll
 
+    # @return [BowlingGame::Frame]
     def initialize(frame = [])
       args = frame
       args = [] unless args.is_a?(Array)
@@ -16,14 +19,20 @@ class BowlingGame
       @second_roll = args[1] || 0
     end
 
+    # @note immutable
+    # @return [Boolean]
     def strike?
       @is_strike ||= first_roll == 10
     end
 
+    # @note immutable
+    # @return [Boolean]
     def spare?
       @is_spare ||= score == 10
     end
 
+    # @note immutable
+    # @return [Integer]
     def score
       @score ||= first_roll + second_roll
     end
