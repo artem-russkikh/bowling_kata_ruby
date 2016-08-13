@@ -4,6 +4,11 @@ describe BowlingGame do
     times.times { subject.roll(pins: pins) }
   end
 
+  def roll_spare
+    subject.roll(pins: 5)
+    subject.roll(pins: 5)
+  end
+
   it('can be #roll') { is_expected.to respond_to :roll }
   it('can get #score') { is_expected.to respond_to :score }
 
@@ -21,8 +26,7 @@ describe BowlingGame do
 
   context '#roll spare' do
     before do
-      subject.roll(pins: 5)
-      subject.roll(pins: 5)
+      roll_spare
       subject.roll(pins: 3)
       roll_many(17, 0)
     end

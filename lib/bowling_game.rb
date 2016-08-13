@@ -25,10 +25,10 @@ class BowlingGame
   def score
     result = 0
     frames = rolls.in_groups_of(2)
-    frames.each_with_index do |frame, index|
-      next_frame = frames[index + 1]
+    frames.each_with_index do |frame, frame_index|
+      next_frame = frames[frame_index + 1]
       frame_sum = frame[0] + frame[1]
-      result += if frame_sum == 10
+      result += if spare?(frame_sum)
                   frame_sum + next_frame[0] # spare
                 else
                   frame_sum
@@ -38,6 +38,10 @@ class BowlingGame
   end
 
   private
+
+  def spare?(frame_sum)
+    frame_sum == 10
+  end
 
   attr_reader :rolls
   attr_reader :current_roll
