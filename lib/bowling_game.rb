@@ -5,20 +5,30 @@
 # The 'tenth frame' has two or three rolls
 # It is different from all the other frames
 class BowlingGame
-  # @see #score
-  attr_writer :score
+  def initialize
+    @rolls = []
+    @current_roll = 0
+  end
 
   # Called each time the player rolls a ball
   # @param pins [Integer] the number of pins knocked down
   # @return true
   def roll(pins:)
-    self.score += pins
+    @rolls[current_roll] = pins
+    @current_roll = current_roll + 1
     true
   end
 
   # Iterate through all the frames, and calculate all their scores
   # @return [Integer]
   def score
-    @score || 0
+    result = 0
+    rolls.each { |roll| result += roll }
+    result
   end
+
+  private
+
+  attr_reader :rolls
+  attr_reader :current_roll
 end
