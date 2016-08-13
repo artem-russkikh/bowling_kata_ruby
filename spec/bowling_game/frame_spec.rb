@@ -88,4 +88,42 @@ describe BowlingGame::Frame do
     it('#spare? is correct') { expect(subject.spare?).to eq(true) }
     it('#score is correct') { expect(subject.score).to eq(10) }
   end
+
+  context 'linked frames #score count strike' do
+    let!(:first_frame) { described_class.new(pins: [10]) }
+    let!(:second_frame) { described_class.new(pins: [3]) }
+    let!(:third_frame) { described_class.new(pins: [5]) }
+
+    subject { first_frame }
+
+    before do
+      first_frame.next = second_frame
+      second_frame.prev = first_frame
+      second_frame.next = third_frame
+      third_frame.prev = second_frame
+    end
+
+    it('#first_pin is correct') { expect(subject.first_pin).to eq(10) }
+    it('#strike? is correct') { expect(subject.strike?).to eq(true) }
+    it('#score is correct') { expect(subject.score).to eq(18) }
+  end
+
+  context 'linked frames #score count spare' do
+    let!(:first_frame) { described_class.new(pins: [5, 5]) }
+    let!(:second_frame) { described_class.new(pins: [3]) }
+    let!(:third_frame) { described_class.new(pins: [5]) }
+
+    subject { first_frame }
+
+    before do
+      first_frame.next = second_frame
+      second_frame.prev = first_frame
+      second_frame.next = third_frame
+      third_frame.prev = second_frame
+    end
+
+    it('#first_pin is correct') { expect(subject.first_pin).to eq(5) }
+    it('#strike? is correct') { expect(subject.spare?).to eq(true) }
+    it('#score is correct') { expect(subject.score).to eq(13) }
+  end
 end
