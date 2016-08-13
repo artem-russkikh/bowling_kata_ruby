@@ -38,7 +38,7 @@ describe BowlingGame do
     it('spare add extra 3 score') { expect(subject.score).to eq(16) }
   end
 
-  xcontext '#roll strike' do
+  context '#roll strike' do
     before do
       roll_strike
       subject.roll(pins: 3)
