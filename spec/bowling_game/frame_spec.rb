@@ -8,10 +8,14 @@ describe BowlingGame::Frame do
 
   context 'frame when passing wrong argument' do
     context 'if argument is not Array' do
-      it 'raise error' do
-        expect do
-          described_class.new('wrong argument')
-        end.to raise_error ArgumentError
+      subject { described_class.new('wrong argument') }
+
+      context 'convert argument to blank Array' do
+        it('#first_roll is correct') { expect(subject.first_roll).to eq(0) }
+        it('#second_roll is correct') { expect(subject.second_roll).to eq(0) }
+        it('#strike? is correct') { expect(subject.strike?).to eq(false) }
+        it('#spare? is correct') { expect(subject.spare?).to eq(false) }
+        it('#score is correct') { expect(subject.score).to eq(0) }
       end
     end
 
