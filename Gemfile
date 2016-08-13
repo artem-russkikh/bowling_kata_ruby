@@ -14,3 +14,7 @@ end
 group :development, :test do
   gem 'pry-byebug', github: 'deivid-rodriguez/pry-byebug'
 end
+
+group :doc do
+  gem 'yard'
+end
