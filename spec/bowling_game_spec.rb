@@ -28,6 +28,12 @@ describe BowlingGame do
     it('#score is correct') { expect(subject.score).to eq(20) }
   end
 
+  context '#roll 12.times with only strikes' do
+    before { roll_many(12, 10) }
+
+    it('#score is correct') { expect(subject.score).to eq(300) }
+  end
+
   context '#roll spare' do
     before do
       roll_spare
