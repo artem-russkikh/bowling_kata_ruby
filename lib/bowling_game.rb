@@ -25,14 +25,14 @@ class BowlingGame
   # @return [Integer]
   def score
     result = 0
-    frames = rolls.in_groups_of(2)
-    frames.each_with_index do |frame, frame_index|
-      next_frame = frames[frame_index + 1]
-      frame_sum = sum_frames(frame[0], frame[1])
-      result += if spare?(frame_sum)
-                  frame_sum + next_frame[0] # spare
+    frames_array = rolls.in_groups_of(2)
+    frames_array.each_with_index do |frame_array, frame_index|
+      current_frame = Frame.new(frame_array)
+      next_frame = Frame.new(frames_array[frame_index + 1])
+      result += if current_frame.spare?
+                  current_frame.score + next_frame.first_roll
                 else
-                  frame_sum
+                  current_frame.score
                 end
     end
     result
