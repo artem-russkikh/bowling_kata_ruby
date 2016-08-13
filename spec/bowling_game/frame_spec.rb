@@ -31,6 +31,7 @@ describe BowlingGame::Frame do
     it('#second_roll is correct') { expect(subject.second_roll).to eq(0) }
     it('#strike? is correct') { expect(subject.strike?).to eq(false) }
     it('#spare? is correct') { expect(subject.spare?).to eq(false) }
+    it('#score is correct') { expect(subject.score).to eq(2) }
   end
 
   context 'frame can have only one element' do
@@ -40,6 +41,7 @@ describe BowlingGame::Frame do
     it('#second_roll is correct') { expect(subject.second_roll).to eq(0) }
     it('#strike? is correct') { expect(subject.strike?).to eq(false) }
     it('#spare? is correct') { expect(subject.spare?).to eq(false) }
+    it('#score is correct') { expect(subject.score).to eq(2) }
 
     context 'element is nil' do
       subject { described_class.new([nil]) }
@@ -48,6 +50,7 @@ describe BowlingGame::Frame do
       it('#second_roll is correct') { expect(subject.second_roll).to eq(0) }
       it('#strike? is correct') { expect(subject.strike?).to eq(false) }
       it('#spare? is correct') { expect(subject.spare?).to eq(false) }
+      it('#score is correct') { expect(subject.score).to eq(0) }
     end
   end
 
@@ -58,6 +61,7 @@ describe BowlingGame::Frame do
     it('#second_roll is correct') { expect(subject.second_roll).to eq(0) }
     it('#strike? is correct') { expect(subject.strike?).to eq(false) }
     it('#spare? is correct') { expect(subject.spare?).to eq(false) }
+    it('#score is correct') { expect(subject.score).to eq(0) }
   end
 
   context 'default frame' do
@@ -67,6 +71,7 @@ describe BowlingGame::Frame do
     it('#second_roll is correct') { expect(subject.second_roll).to eq(5) }
     it('#strike? is correct') { expect(subject.strike?).to eq(false) }
     it('#spare? is correct') { expect(subject.spare?).to eq(false) }
+    it('#score is correct') { expect(subject.score).to eq(6) }
   end
 
   context 'frame is spare' do
@@ -76,6 +81,7 @@ describe BowlingGame::Frame do
     it('#second_roll is correct') { expect(subject.second_roll).to eq(3) }
     it('#strike? is correct') { expect(subject.strike?).to eq(false) }
     it('#spare? is correct') { expect(subject.spare?).to eq(true) }
+    it('#score is correct') { expect(subject.score).to eq(10) }
   end
 
   context 'frame is strike' do
@@ -85,5 +91,6 @@ describe BowlingGame::Frame do
     it('#second_roll is correct') { expect(subject.second_roll).to eq(0) }
     it('#strike? is correct') { expect(subject.strike?).to eq(true) }
     it('#spare? is correct') { expect(subject.spare?).to eq(true) }
+    it('#score is correct') { expect(subject.score).to eq(10) }
   end
 end
