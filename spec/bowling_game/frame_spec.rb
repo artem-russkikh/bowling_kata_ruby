@@ -6,15 +6,25 @@ describe BowlingGame::Frame do
   it('respond_to #spare?') { is_expected.to respond_to :spare? }
 
   context 'frame when passing wrong argument' do
-    it 'raise error' do
-      expect do
-        described_class.new('wrong argument')
-      end.to raise_error ArgumentError
+    context 'if argument is not Array' do
+      it 'raise error' do
+        expect do
+          described_class.new('wrong argument')
+        end.to raise_error ArgumentError
+      end
+    end
+
+    context 'if argument contain anything other than Integer' do
+      it 'raise error' do
+        expect do
+          described_class.new([0, 'asd'])
+        end.to raise_error ArgumentError
+      end
     end
   end
 
   context 'frame have nil' do
-    before { subject { described_class.new([2, nil]) } }
+    subject { described_class.new([2, nil]) }
 
     it('#first_roll is correct') { expect(subject.first_roll).to eq(2) }
     it('#second_roll is correct') { expect(subject.second_roll).to eq(0) }
@@ -23,7 +33,7 @@ describe BowlingGame::Frame do
   end
 
   context 'frame can have only one element' do
-    before { subject { described_class.new([2]) } }
+    subject { described_class.new([2]) }
 
     it('#first_roll is correct') { expect(subject.first_roll).to eq(2) }
     it('#second_roll is correct') { expect(subject.second_roll).to eq(0) }
@@ -31,7 +41,7 @@ describe BowlingGame::Frame do
     it('#spare? is correct') { expect(subject.spare?).to eq(false) }
 
     context 'element is nil' do
-      before { subject { described_class.new([nil]) } }
+      subject { described_class.new([nil]) }
 
       it('#first_roll is correct') { expect(subject.first_roll).to eq(0) }
       it('#second_roll is correct') { expect(subject.second_roll).to eq(0) }
@@ -41,7 +51,7 @@ describe BowlingGame::Frame do
   end
 
   context 'frame without elements' do
-    before { subject { described_class.new([]) } }
+    subject { described_class.new([]) }
 
     it('#first_roll is correct') { expect(subject.first_roll).to eq(0) }
     it('#second_roll is correct') { expect(subject.second_roll).to eq(0) }
@@ -50,7 +60,7 @@ describe BowlingGame::Frame do
   end
 
   context 'default frame' do
-    before { subject { described_class.new([1, 5]) } }
+    subject { described_class.new([1, 5]) }
 
     it('#first_roll is correct') { expect(subject.first_roll).to eq(1) }
     it('#second_roll is correct') { expect(subject.second_roll).to eq(5) }
@@ -59,7 +69,7 @@ describe BowlingGame::Frame do
   end
 
   context 'frame is spare' do
-    before { subject { described_class.new([7, 3]) } }
+    subject { described_class.new([7, 3]) }
 
     it('#first_roll is correct') { expect(subject.first_roll).to eq(7) }
     it('#second_roll is correct') { expect(subject.second_roll).to eq(3) }
@@ -68,7 +78,7 @@ describe BowlingGame::Frame do
   end
 
   context 'frame is strike' do
-    before { subject { described_class.new([10]) } }
+    subject { described_class.new([10]) }
 
     it('#first_roll is correct') { expect(subject.first_roll).to eq(10) }
     it('#second_roll is correct') { expect(subject.second_roll).to eq(0) }
