@@ -20,10 +20,11 @@ class BowlingGame
     end
 
     def spare?
-      first_roll + second_roll == 10
+      score == 10
     end
 
     def score
+      first_roll + second_roll
     end
   end
 end
