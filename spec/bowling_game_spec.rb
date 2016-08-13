@@ -19,11 +19,11 @@ describe BowlingGame do
     it('#score is correct') { expect(subject.score).to eq(20) }
   end
 
-  xcontext '#roll spare' do
+  context '#roll spare' do
     before do
-      subject.roll(5)
-      subject.roll(5)
-      subject.roll(3)
+      subject.roll(pins: 5)
+      subject.roll(pins: 5)
+      subject.roll(pins: 3)
       roll_many(17, 0)
     end
 
